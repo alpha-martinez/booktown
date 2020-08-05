@@ -1,21 +1,39 @@
 -- ### Order
 -- 1. Find all subjects sorted by subject
+
+select * from subjects order by subject;
+
 -- 2. Find all subjects sorted by location
+select * from subjects order by location;
 
 -- ### Where
 -- 3. Find the book "Little Women"
+select title from books where title='Little Women';
 -- 4. Find all books containing the word "Python"
+select * from books where title like '%Python%';
 -- 5. Find all subjects with the location "Main St" sort them by subject
-
+select subject, location from subjects where location = 'Main St' order by subject;
 
 -- ### Joins
 
 -- 6. Find all books about Computers and list ONLY the book titles
+select title, subject 
+from books 
+inner join subjects on subjects.id=books.subject_id 
+where subject='Computers';
+
 -- 7. Find all books and display a result table with ONLY the following columns
 -- 	* Book title
 -- 	* Author's first name
 -- 	* Author's last name
 -- 	* Book subject
+SELECT title AS "Title",
+first_name as "Author's first name",
+last_name as "Author's last name",
+subject as "Book subject"
+FROM books
+INNER JOIN authors ON authors.id=books.author_id
+INNER JOIN subjects ON subjects.id=books.subject_id;
 -- 8. Find all books that are listed in the stock table
 -- 	* Sort them by retail price (most expensive first)
 -- 	* Display ONLY: title and price
